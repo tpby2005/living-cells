@@ -2,7 +2,7 @@
 #include <raylib.h>
 #include <unistd.h>
 
-#define SIZE 800
+#define SIZE 80
 
 enum cell_state
 {
@@ -133,7 +133,7 @@ void display()
 
 int main(void)
 {
-    InitWindow(SIZE, SIZE, "Game of Life");
+    InitWindow(SIZE * 10, SIZE * 10, "Game of Life");
     SetTargetFPS(60);
 
     for (int i = 0; i < SIZE; i++)
