@@ -1,3 +1,5 @@
+#define RAYGUI_IMPLEMENTATION
+
 #include <stdio.h>
 #include <raylib.h>
 #include <unistd.h>
@@ -131,18 +133,26 @@ void display()
     EndDrawing();
 }
 
-int main(void)
+void grid_clear()
 {
-    InitWindow(SIZE * 10, SIZE * 10, "Game of Life");
-    SetTargetFPS(60);
-
-    for (int i = 0; i < SIZE; i++)
+    int i, j;
+    for (i = 0; i < SIZE; i++)
     {
-        for (int j = 0; j < SIZE; j++)
+        for (j = 0; j < SIZE; j++)
         {
             grid[i][j] = DEAD;
         }
     }
+}
+
+int main(void)
+{
+    InitWindow(SIZE * 10, (SIZE * 10) + 40, "Game of Life");
+    SetTargetFPS(60);
+
+    grid_clear();
+
+    bool paused = true;
 
     while (!WindowShouldClose())
     {
@@ -157,11 +167,6 @@ int main(void)
             }
         }
 
-        if (IsKeyPressed(KEY_ENTER))
-        {
-            break;
-        }
-
         if (IsKeyPressed(KEY_R))
         {
             for (int i = 0; i < SIZE; i++)
@@ -173,24 +178,33 @@ int main(void)
             }
         }
 
-        BeginDrawing();
-        ClearBackground(RAYWHITE);
-        for (int i = 0; i < SIZE; i++)
+        if (IsKeyPressed(KEY_SPACE))
         {
-            for (int j = 0; j < SIZE; j++)
-            {
-                if (grid[i][j] == ALIVE)
-                {
-                    DrawRectangle(i * 10, j * 10, 10, 10, BLACK);
-                }
-            }
+            paused = !paused;
         }
-        EndDrawing();
-    }
 
-    while (!WindowShouldClose())
-    {
-        game_of_life();
+        if (IsKeyPressed(KEY_S))
+        {
+            game_of_life();
+
+            paused = true;
+        }
+
+        if (IsKeyPressed(KEY_C))
+        {
+            grid_clear();
+        }
+
+        if (!paused)
+        {
+            game_of_life();
+        }
+
+        else
+        {
+            DrawText("Paused", 10, 810, 20, BLACK);
+        }
+
         display();
         usleep(10000);
     }

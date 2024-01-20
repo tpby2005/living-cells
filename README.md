@@ -9,15 +9,17 @@
 
 ### Usage:
 
-```
+```sh
 living-cells
 ```
 
 ### Controls:
 
 - Mouse click to toggle the state of a cell.
-- Press the `Enter` key to start the simulation.
+- Press the `Space` key to start/stop the simulation.
 - Press the `R` key to randomize the initial state of the cells.
+- Press the `S` key to step the simulation forward one generation.
+- Press the `C` key to clear the grid.
 
 ### License:
 
