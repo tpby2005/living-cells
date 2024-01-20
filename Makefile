@@ -11,4 +11,7 @@ clean:
 install: living-cells
 	cp living-cells /usr/local/bin
 
+run: living-cells
+	./living-cells
+
 all: living-cells
